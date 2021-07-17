@@ -9,7 +9,7 @@ namespace Dotnet.With.Sentry
         public static void Main(string[] args)
         {
             using(SentrySdk.Init(o => {
-                o.Dsn = System.Environment.GetEnvironmentVariable("Sentry:Dns");
+                o.Dsn = System.Environment.GetEnvironmentVariable("Sentry__Dns");
                 // When configuring for the first time, to see what the SDK is doing:
                 o.Debug = true;
                 // Set traces_sample_rate to 1.0 to capture 100% of transactions for performance monitoring.
@@ -23,7 +23,9 @@ namespace Dotnet.With.Sentry
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    string port = System.Environment.GetEnvironmentVariable("PORT") ?? "5000";
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls($"http://*:{port}");
                 });
     }
 }
