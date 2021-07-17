@@ -9,7 +9,7 @@ namespace Dotnet.With.Sentry
         public static void Main(string[] args)
         {
             using(SentrySdk.Init(o => {
-                o.Dsn = "https://0515f922f45d4ed6be3fc570f17b5330@o917223.ingest.sentry.io/5859309";
+                o.Dsn = System.Environment.GetEnvironmentVariable("Sentry:Dns");
                 // When configuring for the first time, to see what the SDK is doing:
                 o.Debug = true;
                 // Set traces_sample_rate to 1.0 to capture 100% of transactions for performance monitoring.
